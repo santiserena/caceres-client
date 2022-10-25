@@ -6,7 +6,7 @@ const drawingsSchema = mongoose.Schema({
     required: true,
   },
   image: {
-    type: Text,
+    type: String,
     required: true,
   },
   secondaryImages: {
@@ -28,4 +28,4 @@ const drawingsSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("cities", drawingsSchema);
+module.exports = mongoose.model("drawings-model", drawingsSchema);
