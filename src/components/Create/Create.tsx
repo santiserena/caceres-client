@@ -4,7 +4,6 @@ import axios from "axios";
 export default function Create(): JSX.Element {
 
     const [drawing, setDrawing] = useState ({image:''});
-    //const [stateImage, setStateImage] = useState('');
 
     const handleOnChange = (ev: React.ChangeEvent<HTMLInputElement>):void =>{
         setDrawing({
@@ -25,8 +24,6 @@ export default function Create(): JSX.Element {
             ...drawing,
             image: base64
           })
-          // error can be in model type or in express middleware
-          //validate()
         };
       };
 
@@ -45,35 +42,51 @@ export default function Create(): JSX.Element {
 
 /* {
   "name": "el aarca", 
-  "image": "imag",                                file
-  "secondaryImages": ["imag2", "imag3"],          [file]
+  "image": "imag",                                          
   "category": "funny",
   "description": "blabla", 
   "date": "fecha"
 } */
+
   return (
     <div>
-      <h1>create:</h1>
+      <h1>Upload new job:</h1>
 
-      <label><input name='name' onChange={handleOnChange}/>Name</label>
-      <br/>
-      <label><input name='secondaryImages' onChange={handleOnChange}/>Secondary images</label>
-      <br/>
-      <label><input name='category' onChange={handleOnChange}/>Category</label>
-      <br/>
-      <label><input name='description' onChange={handleOnChange}/>Description</label>
-      <br/>
-      <label><input name='date' onChange={handleOnChange}/>Date</label>
-      <br/>
+      <label>
+        <input name="name" onChange={handleOnChange} />
+        Name
+      </label>
+      <br />
+      <label>
+        <input name="secondaryImages" onChange={handleOnChange} />
+        Secondary images
+      </label>
+      <br />
+      <label>
+        <input name="category" onChange={handleOnChange} />
+        Category
+      </label>
+      <br />
+      <label>
+        <input name="description" onChange={handleOnChange} />
+        Description
+      </label>
+      <br />
+      <label>
+        <input name="date" onChange={handleOnChange} />
+        Date
+      </label>
+      <br />
 
-      
-                    <label onChange={(ev) => base64Convert(ev)} htmlFor="formId">
-                        <input name="image" type="file" id="formId" hidden />
-                            <img src={drawing.image} alt="Not found" width="40" height="40" />
-                    </label>
-                
-      <br/>
-      <button onClick={()=>upload()}>Upload</button>
+      <label onChange={(ev) => base64Convert(ev)} htmlFor="formId">
+        BUTTON
+        <input name="image" type="file" id="formId" hidden />
+      </label>
+
+      <img src={drawing.image} alt="Not found" width="40" height="40" />
+
+      <br />
+      <button onClick={() => upload()}>Upload JPG image </button>
     </div>
   );
 }

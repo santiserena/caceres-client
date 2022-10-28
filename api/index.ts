@@ -10,7 +10,10 @@ const port = process.env.PORT;
 
 app.listen(port, () => console.log("Listening on port", port));
 
-app.use(express.json());
+app.use(express.json({
+  limit: '50mb'
+}));
+
 app.use(morgan("dev"));
 
 app.use((req, res, next) => {
@@ -21,11 +24,15 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
+
 mongoose
   .connect(process.env.MONGO_KEY)
   .then(() => console.log("connected to db"))
   .catch((err: Error) => console.log(err));
 
 app.use("/", routes);
+
 
 /* 21 min */

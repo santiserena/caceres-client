@@ -6,7 +6,7 @@ const drawingsSchema = mongoose.Schema({
     required: true,
   },
   image: {
-    type: Buffer,
+    type: String,
     required: true,
   },
   secondaryImages: {
