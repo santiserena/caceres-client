@@ -79,14 +79,14 @@ export default function Create(): JSX.Element {
       <br />
 
       <label onChange={(ev) => base64Convert(ev)} htmlFor="formId">
-        BUTTON
+        clich here to choose file
         <input name="image" type="file" id="formId" hidden />
       </label>
-
+{/* que se muestre solo si existe!!!! */}
       <img src={drawing.image} alt="Not found" width="40" height="40" />
 
       <br />
-      <button onClick={() => upload()}>Upload JPG image </button>
+      <button onClick={() => upload()}>Upload</button>
     </div>
   );
 }

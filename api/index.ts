@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 
 mongoose
   .connect(process.env.MONGO_KEY)
-  .then(() => console.log("connected to db"))
+  .then(() => console.log("connected to mongo db"))
   .catch((err: Error) => console.log(err));
 
 app.use("/", routes);
