@@ -25,11 +25,10 @@ router.get("/all-list", async (req, res) => {
 
 //ALL DRAWING (BIG FETCH)
 router.get("/all-drawings", async (req, res) => {
-  console.log("entre");
 
   try {
     const drawings: Object[] = await Drawings.find();
-    console.log("entre2");
+    console.log("Big fetch");
     res.send(drawings);
   } catch (error) {
     console.log("error-> ", error);

@@ -35,6 +35,7 @@ export default function Create(): JSX.Element {
     const upload = async () => {
       try {
         await axios.post("http://localhost:3000/add-drawing", drawing);
+        alert ("Picture uploaded");
       } catch (error) {
         console.log(error);
       }

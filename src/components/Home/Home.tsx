@@ -11,7 +11,7 @@ useEffect( () =>{
   .then(result=>setPictures(result.data))
 },[])
 
-console.log(pictures);
+//console.log(pictures);
 
   return (
     <div>
