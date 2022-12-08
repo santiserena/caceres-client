@@ -9,12 +9,15 @@ router.get("/all-list", async (req, res) => {
   try {
     interface drawing {
       name: string;
+      id: string
     }
-
+    
     let drawings: drawing[] = await Drawings.find();
+    
+    console.log("llegue");
 
     drawings = drawings.map((el) => {
-      return { name: el.name };
+      return { name: el.name, id: el.id };
     });
 
     res.send(drawings);
@@ -48,7 +51,7 @@ router.post("/add-drawing", async (req: Request, res: Response) => {
   }
 });
 
-//DELETE BY ID
+//DELETE BY ID !!!!!!!!!!!!!!!!!!!! ver porque borra siempre el primero....
 router.delete("/erase/:id", async (req, res) => {
   try {
     await Drawings.findOneAndRemove({

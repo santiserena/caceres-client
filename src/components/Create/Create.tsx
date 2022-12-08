@@ -12,7 +12,7 @@ export default function Create(): JSX.Element {
         })
     }
 
-    const base64Convert = (ev: React.ChangeEvent<HTMLImageElement> | any) => { //too fix 
+/*     const base64Convert = (ev: React.ChangeEvent<HTMLImageElement> | any) => { //too fix 
         
         let file = ev.target.files[0];
         const fileReader = new FileReader();
@@ -25,7 +25,7 @@ export default function Create(): JSX.Element {
             image: base64
           })
         };
-      };
+      }; */
 
     /* const validate = () =>{
         console.log('do validate');
@@ -34,7 +34,11 @@ export default function Create(): JSX.Element {
 
     const upload = async () => {
       try {
-        await axios.post("http://localhost:3000/add-drawing", drawing);
+        
+        let newUrl: string = drawing.image.replace("/view?usp=share_link","");
+        newUrl = newUrl.replace("file/d/","uc?export=view&id=");
+        
+        await axios.post("http://localhost:3000/add-drawing", {...drawing, image:newUrl});
         alert ("Picture uploaded");
       } catch (error) {
         console.log(error);
@@ -78,11 +82,16 @@ export default function Create(): JSX.Element {
         Date
       </label>
       <br />
+      <label>
+        <input name="image" onChange={handleOnChange} />
+        Image url
+      </label>
+      <br />
 
-      <label onChange={(ev) => base64Convert(ev)} htmlFor="formId">
+      {/* <label onChange={(ev) => base64Convert(ev)} htmlFor="formId">
         clich here to choose file
         <input name="image" type="file" id="formId" hidden />
-      </label>
+      </label> */}
 {/* que se muestre solo si existe!!!! */}
       <img src={drawing.image} alt="Not found" width="40" height="40" />
 
