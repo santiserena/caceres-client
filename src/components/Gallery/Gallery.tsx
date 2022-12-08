@@ -16,13 +16,15 @@ export default function Gallery(): JSX.Element {
         <div>
           {pictures.map((e: any) => (
             <div key={e._id}>
-              <p>{e.name}</p>
-              <p>{e._id}</p>
+              <p>Nombre: {e.name}</p>
+              <p>Id: {e._id}</p>
+              <p>Fecha: {e.date}</p>
+              <p>Category: {e.category}</p>
               <img src={e.image} width="100" alt="image not found" />
               <p>______________</p>
             </div>
           ))}
-          {/* prueba */}<img src="https://drive.google.com/file/d/1h96Yytw3V_Uh2BhpR_BkFdws3IsA19Yh/view?usp=share_link" alt="" />
+          
         </div>
       ) : (
         <p>Loading..</p>

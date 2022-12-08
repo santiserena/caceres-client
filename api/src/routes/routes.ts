@@ -64,4 +64,26 @@ router.delete("/erase/:id", async (req, res) => {
   }
 });
 
+//GET ALL CATEGORIES
+router.get("/categories", async (req, res) => {
+  try {
+    
+    interface categ {
+      category: string;
+    }
+
+    let allElements : categ[] = await Drawings.find();
+
+    let arrayCategories : string[] = allElements.map ( el => el.category);
+
+    let finalList : Set<string> = new Set(arrayCategories) 
+
+    let arr : string[] = Array.from(finalList);
+     
+    res.send(arr);
+  } catch (error) {
+    console.log("error-> ", error);
+  }
+});
+
 module.exports = router;
