@@ -55,7 +55,7 @@ router.post("/add-drawing", async (req: Request, res: Response) => {
 router.delete("/erase/:id", async (req, res) => {
   try {
     await Drawings.findOneAndRemove({
-      id: req.params.id,
+      _id: req.params.id,
     });
 
     res.send("deleted document");

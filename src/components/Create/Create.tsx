@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+
 export default function Create(): JSX.Element {
 
     const [drawing, setDrawing] = useState({
@@ -10,12 +11,17 @@ export default function Create(): JSX.Element {
       date: "",
     });
     const [categories, setCategories] = useState ([]);
-    const [imageToUpload, setImageToUpload] = useState ('')
+    const [imageToUpload, setImageToUpload] = useState ('');
+    const [pictures, setPictures] = useState([]);
 
     useEffect(() => {
       axios
         .get("http://localhost:3000/categories")
         .then((result) => setCategories(result.data));
+
+      axios
+        .get("http://localhost:3000/all-drawings")
+        .then((result) => setPictures(result.data));
     }, []);
     
     const handleOnChange = (ev: React.ChangeEvent<HTMLInputElement>): void => {
@@ -55,18 +61,29 @@ export default function Create(): JSX.Element {
       } else alert("Please complete all the fields");
     };
 
+    const erase = async (ev: React.MouseEvent<HTMLElement>, id?: string) => {
+      console.log("BORRAR-> ", id);
+      try {
+        await axios.delete(`http://localhost:3000/erase/${id}`);
+
+        alert("Picture deleted");
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
   return (
     <div>
-
       <h1>Welcome Capuzz! Upload a new job..</h1>
 
       <label>
         <input name="name" onChange={handleOnChange} />
         Name
       </label>
-      
+
       <br />
-      
+
       <label>
         <input name="secondaryImages" onChange={handleOnChange} />
         Secondary images
@@ -75,11 +92,18 @@ export default function Create(): JSX.Element {
       <br />
 
       <label>
-      <input type="text" name="category" list="category" onChange={handleOnChange}/>
+        <input
+          type="text"
+          name="category"
+          list="category"
+          onChange={handleOnChange}
+        />
         Category
       </label>
       <datalist id="category">
-        {categories.map( (el: string) => <option key={el} value={el}></option>)}
+        {categories.map((el: string) => (
+          <option key={el} value={el}></option>
+        ))}
       </datalist>
 
       <br />
@@ -109,6 +133,25 @@ export default function Create(): JSX.Element {
 
       <br />
       <button onClick={() => upload()}>Upload</button>
+
+
+      {/* DELETE FEATURE */}
+      <p>_______________________________________________</p>
+
+      {pictures.length ? (
+        <div>
+          {pictures.map((e: any) => (
+            <div key={e._id}>
+              <p>Nombre: {e.name}</p>
+              <img src={e.image} width="80" alt="image not found" />
+              <button onClick={(ev) => erase(ev, e._id)}>Erase</button>
+              <p>______________</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>Loading..</p>
+      )}
     </div>
   );
 }

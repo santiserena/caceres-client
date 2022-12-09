@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function Gallery(): JSX.Element {
-  const [pictures, setPictures] = useState([]); /* ver si algo de ts */
+  const [pictures, setPictures] = useState([]); 
   useEffect(() => {
     axios
       .get("http://localhost:3000/all-drawings")
