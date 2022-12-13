@@ -13,6 +13,7 @@ export default function Create(): JSX.Element {
     const [categories, setCategories] = useState ([]);
     const [imageToUpload, setImageToUpload] = useState ('');
     const [pictures, setPictures] = useState([]);
+    const [confirmDelete, setConfirmDelete] = useState('');
 
     useEffect(() => {
       axios
@@ -63,18 +64,27 @@ export default function Create(): JSX.Element {
 
     const erase = async (ev: React.MouseEvent<HTMLElement>, id?: string) => {
       console.log("BORRAR-> ", id);
+      if(id !== undefined)setConfirmDelete (id)
       try {
-        await axios.delete(`http://localhost:3000/erase/${id}`);
-
+        //await axios.delete(`http://localhost:3000/erase/${id}`);
+        
         alert("Picture deleted");
-        window.location.reload();
+        //window.location.reload();
       } catch (error) {
         console.log(error);
       }
+
     };
 
-  return (
-    <div>
+    const confirmDel = () =>{
+      console.log('confirmado');
+
+
+      setConfirmDelete('');
+    }
+    
+    return (
+      <div>
       <h1>Welcome Capuzz! Upload a new job..</h1>
 
       <label>
@@ -97,13 +107,13 @@ export default function Create(): JSX.Element {
           name="category"
           list="category"
           onChange={handleOnChange}
-        />
+          />
         Category
       </label>
       <datalist id="category">
         {categories.map((el: string) => (
           <option key={el} value={el}></option>
-        ))}
+          ))}
       </datalist>
 
       <br />
@@ -137,6 +147,7 @@ export default function Create(): JSX.Element {
 
       {/* DELETE FEATURE */}
       <p>_______________________________________________</p>
+      {confirmDelete? <button onClick={()=> confirmDel() }>Are you sure you want to delete the image?</button> : <></>} 
 
       {pictures.length ? (
         <div>

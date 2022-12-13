@@ -51,7 +51,7 @@ router.post("/add-drawing", async (req: Request, res: Response) => {
   }
 });
 
-//DELETE BY ID !!!!!!!!!!!!!!!!!!!! ver porque borra siempre el primero....
+//DELETE BY ID
 router.delete("/erase/:id", async (req, res) => {
   try {
     await Drawings.findOneAndRemove({
