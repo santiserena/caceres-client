@@ -14,6 +14,7 @@ export default function Create(): JSX.Element {
     const [imageToUpload, setImageToUpload] = useState ('');
     const [pictures, setPictures] = useState([]);
     const [confirmDelete, setConfirmDelete] = useState('');
+    const [namePictureToDelete, setNamePictureToDelete] = useState('');
 
     useEffect(() => {
       axios
@@ -62,107 +63,106 @@ export default function Create(): JSX.Element {
       } else alert("Please complete all the fields");
     };
 
-    const erase = async (ev: React.MouseEvent<HTMLElement>, id?: string) => {
-      console.log("BORRAR-> ", id);
-      if(id !== undefined)setConfirmDelete (id)
+    const erase = async (ev: React.MouseEvent<HTMLElement>, id: string, name: string) => {
+      //console.log("BORRAR-> ", id,"NOMBRE-> ", name);
+      setConfirmDelete(id);
+      setNamePictureToDelete(name);
+    };
+
+    const confirmDel = async () => {
       try {
-        //await axios.delete(`http://localhost:3000/erase/${id}`);
-        
-        alert("Picture deleted");
-        //window.location.reload();
+        await axios.delete(`http://localhost:3000/erase/${confirmDelete}`);
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }
-
     };
-
-    const confirmDel = () =>{
-      console.log('confirmado');
-
-
-      setConfirmDelete('');
-    }
     
     return (
       <div>
-      <h1>Welcome Capuzz! Upload a new job..</h1>
+        <h1>Welcome Capuzz! Upload a new job..</h1>
 
-      <label>
-        <input name="name" onChange={handleOnChange} />
-        Name
-      </label>
+        <label>
+          <input name="name" onChange={handleOnChange} />
+          Name
+        </label>
 
-      <br />
+        <br />
 
-      <label>
-        <input name="secondaryImages" onChange={handleOnChange} />
-        Secondary images
-      </label>
+        <label>
+          <input name="secondaryImages" onChange={handleOnChange} />
+          Secondary images
+        </label>
 
-      <br />
+        <br />
 
-      <label>
-        <input
-          type="text"
-          name="category"
-          list="category"
-          onChange={handleOnChange}
+        <label>
+          <input
+            type="text"
+            name="category"
+            list="category"
+            onChange={handleOnChange}
           />
-        Category
-      </label>
-      <datalist id="category">
-        {categories.map((el: string) => (
-          <option key={el} value={el}></option>
+          Category
+        </label>
+        <datalist id="category">
+          {categories.map((el: string) => (
+            <option key={el} value={el}></option>
           ))}
-      </datalist>
+        </datalist>
 
-      <br />
+        <br />
 
-      <label>
-        <input name="description" onChange={handleOnChange} />
-        Description
-      </label>
+        <label>
+          <input name="description" onChange={handleOnChange} />
+          Description
+        </label>
 
-      <br />
+        <br />
 
-      <label>
-        <input type="date" name="date" onChange={handleOnChange} />
-        Date
-      </label>
+        <label>
+          <input type="date" name="date" onChange={handleOnChange} />
+          Date
+        </label>
 
-      <br />
+        <br />
 
-      <label>
-        <input name="image" onChange={preparingImage} />
-        Google Drive image URL
-      </label>
+        <label>
+          <input name="image" onChange={preparingImage} />
+          Google Drive image URL
+        </label>
 
-      <br />
-      <p>Preview:</p>
-      <img src={imageToUpload} alt="Not found" width="100" />
+        <br />
+        <p>Preview:</p>
+        {imageToUpload?<img src={imageToUpload} alt="Not found" width="100" />:null}
 
-      <br />
-      <button onClick={() => upload()}>Upload</button>
+        <br />
+        <button onClick={() => upload()}>Upload</button>
 
+        {/* DELETE FEATURE */}
+        <p>_______________________________________________</p>
+        {confirmDelete ? (
+          <div>
+            <h1>Are you sure you want to delete the image called {namePictureToDelete}?</h1>
+            <button onClick={() => confirmDel()}>Yes</button>
+            <button onClick={() => setConfirmDelete("")}>No</button>
+          </div>
+        ) : null}
 
-      {/* DELETE FEATURE */}
-      <p>_______________________________________________</p>
-      {confirmDelete? <button onClick={()=> confirmDel() }>Are you sure you want to delete the image?</button> : <></>} 
-
-      {pictures.length ? (
-        <div>
-          {pictures.map((e: any) => (
-            <div key={e._id}>
-              <p>Nombre: {e.name}</p>
-              <img src={e.image} width="80" alt="image not found" />
-              <button onClick={(ev) => erase(ev, e._id)}>Erase</button>
-              <p>______________</p>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p>Loading..</p>
-      )}
-    </div>
-  );
+        {pictures.length ? (
+          <div>
+            {pictures.map((e: any) => (
+              <div key={e._id}>
+                <p>Nombre: {e.name}</p>
+                <img src={e.image} width="80" alt="image not found" />
+                <button onClick={(ev) => erase(ev, e._id, e.name)}>Erase</button>
+                <p>______________</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>Loading..</p>
+        )}
+      </div>
+    );
 }
