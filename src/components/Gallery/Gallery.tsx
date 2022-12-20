@@ -17,7 +17,6 @@ export default function Gallery(): JSX.Element {
           {pictures.map((e: any) => (
             <div key={e._id}>
               <p>Nombre: {e.name}</p>
-              <p>Id: {e._id}</p>
               <p>Fecha: {e.date}</p>
               <p>Category: {e.category}</p>
               <img src={e.image} width="100" alt="image not found" />
