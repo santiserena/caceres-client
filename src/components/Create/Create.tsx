@@ -188,6 +188,7 @@ export default function Create(): JSX.Element {
           {pictures.map((e: any) => (
             <div key={e._id}>
               <p>Nombre: {e.name}</p>
+              <p>Date: {e.date}</p>
               <img src={e.image} width="80" alt="image not found" />
               <button onClick={(ev) => erase(ev, e._id, e.name)}>Erase</button>
               <p>______________</p>
