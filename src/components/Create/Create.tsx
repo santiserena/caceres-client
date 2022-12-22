@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { auth } from "../../firebase-config";
 import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Create(): JSX.Element {
   const [drawing, setDrawing] = useState({
@@ -106,6 +106,7 @@ export default function Create(): JSX.Element {
       <h1>Welcome Capuzz! Upload a new job..</h1>
 
       <button onClick={signO}>Sign Out</button>
+      <Link to="/"><button>Go to site</button></Link>
 
       <br />
       <br />
