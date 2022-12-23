@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Pagination from "../Pagination/Pagination";
 
 export default function Gallery(): JSX.Element {
   
@@ -9,12 +10,34 @@ export default function Gallery(): JSX.Element {
   //category filter:
   const [category, setCategory] = useState<any[]>([]);
 
+  /* _______________pagination_________________________ */
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const [cardsPerPage, setCardsPerPage] = useState (4)
+  const indexOfLastCard = currentPage * cardsPerPage //last card of the page
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage //first card of the page
+  const currentCards = category.slice (indexOfFirstCard, indexOfLastCard) // current page we are seeing
+  
+  const pagination = async (pageNumber:number) =>{
+    setCurrentPage (pageNumber)
+    
+    //let us = JSON.parse(localStorage.getItem("current") || "");
+    //console.log("storage->", us);
+    
+  }
+/* _______________pagination_________________________ */
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/all-drawings")
       .then((result) => {
         setPictures(result.data)
-        setCategory(result.data)
+        
+        let current = JSON.parse(localStorage.getItem("current") || "")
+        if (current?.length) setCategory(current);
+        else setCategory(result.data) 
+        console.log("storage ->" , current);
+        
       });
 
     axios
@@ -25,13 +48,20 @@ export default function Gallery(): JSX.Element {
 
   const selectHandle = (event: React.ChangeEvent<HTMLSelectElement>) => {
 
+    pagination(1);
     let aux: any = pictures.filter(
       (elem) => elem.category === event.target.value
     );
 
     setCategory(aux);
+    localStorage.setItem("current", JSON.stringify(aux));
+    //cambiar el valor seleccionado por defecto en el select!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       
-    if (event.target.value === "showAll") setCategory(pictures);
+    if (event.target.value === "showAll") {
+      setCategory(pictures)
+      localStorage.setItem("current", JSON.stringify(pictures));
+      //cambiar el valor seleccionado por defecto en el select!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    };
   };
 
   return (
@@ -47,10 +77,33 @@ export default function Gallery(): JSX.Element {
           </option>
         ))}
       </select>
+      {/* _____________________pagination______________________ */}
+
+      <div>
+        {currentCards?.map((el) => (
+            <div key={el._id}>
+              <p>Nombre: {el.name}</p>
+              <p>Fecha: {el.date}</p>
+              <p>Category: {el.category}</p>
+              <img src={el.image} width="100" alt="image not found" />
+              <p>______________</p>
+            </div>
+          ))}
+      </div>
+
+      <div>
+        <Pagination
+          cardsPerPage={cardsPerPage}
+          allPictures={category.length}
+          pagination={pagination}
+          currentPage={currentPage}
+        />
+      </div>
+      {/* _____________________pagination______________________ */}
 
       <br />
 
-      {category.length ? (
+      {/* {category.length ? (
         <div>
           {category.map((e: any) => (
             <div key={e._id}>
@@ -64,7 +117,12 @@ export default function Gallery(): JSX.Element {
         </div>
       ) : (
         <p>Loading..</p>
-      )}
+      )} */}
+
+
+
+
+      
     </div>
   );
 }
