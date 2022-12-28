@@ -15,7 +15,7 @@ useEffect( () =>{
 
   return (
     <div>
-      <h1>Hooome</h1>
+      <h1>Home</h1>
       
       
       {/* <img src="https://drive.google.com/uc?export=view&id=1H6qtc8D2zFUWgdzHoG__OhhBH_9ducI2" width="193" alt="" /> */}

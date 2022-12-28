@@ -9,10 +9,16 @@ export default function Gallery(): JSX.Element {
   const [categories, setCategoties] = useState([]);
   //category filter:
   const [category, setCategory] = useState<any[]>([]);
+  //dafault value on select:
+  const [selectDefault, setSelectDefault] = useState("showAll");
 
   /* _______________pagination_________________________ */
 
-  const [currentPage, setCurrentPage] = useState(1)
+  const [currentPage, setCurrentPage] = useState<number>(
+    JSON.parse(localStorage.getItem("paginationMemory") as any)
+      ? JSON.parse(localStorage.getItem("paginationMemory") as any)
+      : 1
+  );
   const [cardsPerPage, setCardsPerPage] = useState (4)
   const indexOfLastCard = currentPage * cardsPerPage //last card of the page
   const indexOfFirstCard = indexOfLastCard - cardsPerPage //first card of the page
@@ -20,10 +26,7 @@ export default function Gallery(): JSX.Element {
   
   const pagination = async (pageNumber:number) =>{
     setCurrentPage (pageNumber)
-    
-    //let us = JSON.parse(localStorage.getItem("current") || "");
-    //console.log("storage->", us);
-    
+    localStorage.setItem("paginationMemory", JSON.stringify(pageNumber));
   }
 /* _______________pagination_________________________ */
 
@@ -36,7 +39,9 @@ export default function Gallery(): JSX.Element {
         let current = JSON.parse(localStorage.getItem("current") || "")
         if (current?.length) setCategory(current);
         else setCategory(result.data) 
-        console.log("storage ->" , current);
+        
+        let defSelValue = JSON.parse(localStorage.getItem("selectDef") || "")
+        if(defSelValue) setSelectDefault(defSelValue);
         
       });
 
@@ -55,12 +60,14 @@ export default function Gallery(): JSX.Element {
 
     setCategory(aux);
     localStorage.setItem("current", JSON.stringify(aux));
-    //cambiar el valor seleccionado por defecto en el select!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    setSelectDefault(event.target.value);
+    localStorage.setItem("selectDef", JSON.stringify(event.target.value));
       
     if (event.target.value === "showAll") {
       setCategory(pictures)
       localStorage.setItem("current", JSON.stringify(pictures));
-      //cambiar el valor seleccionado por defecto en el select!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      setSelectDefault(event.target.value);
+      localStorage.setItem("selectDef", JSON.stringify(event.target.value));
     };
   };
 
@@ -69,7 +76,7 @@ export default function Gallery(): JSX.Element {
       <br />
 
       <label>Categories: </label>
-      <select onChange={selectHandle}>
+      <select value={selectDefault} onChange={selectHandle}>
         <option value="showAll">Show all</option>
         {categories?.map((el) => (
           <option value={el} key={el}>
