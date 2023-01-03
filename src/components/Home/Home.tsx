@@ -1,14 +1,24 @@
+import st from './Home.module.css';
+
+
+
+
+//HACER COMPONENTE DE BOTON
+
+
+
+
+
 import Carousel from "../Carousel/Carousel";
 
 export default function Home(): JSX.Element {
 
   return (
-    <div>
-      <h1>Home</h1>
+    <div className={st.tex}>
+      <h1>Emiliano Cáceres</h1>
       
-      <h2>Latest works</h2>
       <Carousel/>
-      <h2>About Emiliano and picture</h2>
+      
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia esse,
         delectus ullam ducimus sequi maiores maxime dicta culpa. Sed culpa

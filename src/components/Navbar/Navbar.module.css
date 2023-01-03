@@ -1,0 +1,10 @@
+.bu {
+  background-color: #212122;
+  color: red;
+  border: 1px solid blueviolet;
+  border-radius: 12px ;
+}
+
+button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
