@@ -11,7 +11,7 @@ function Carrusel() {
     <div className='full-container'>
       
       <Carousel className='carrusel-container'>
-        <Carousel.Item className='fitten'>
+       {/*  <Carousel.Item className='fitten'>
           
             <img
               id='carrusel-image'
@@ -20,7 +20,7 @@ function Carrusel() {
               alt="image not found"
             />
           
-        </Carousel.Item>
+        </Carousel.Item> */}
         <Carousel.Item>
           
             <img

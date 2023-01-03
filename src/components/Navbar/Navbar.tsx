@@ -1,19 +1,21 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import st from "./Navbar.module.css";
+import ButtonBuilt from "../ButtonBuilt/Button";
 
 export default function Navbar(): JSX.Element {
   return (
     <div>
-
+      <br/>
       <Link to="/">
-        <button>Home</button>
+        <ButtonBuilt t="Home"/>
       </Link>
 
       <Link to="/gallery">
-        <button>Gallery</button>
+        <ButtonBuilt t="Gallery"/>
       </Link>
 
       <a href="https://www.instagram.com/capuzz.art/" target="_blank">
-        <button>Instagram</button>
+        <ButtonBuilt t="Instagram"/>
       </a>
 
     </div>
