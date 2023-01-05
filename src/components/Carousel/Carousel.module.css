@@ -1,0 +1,11 @@
+.main{
+    display: flex;
+    justify-content: center;
+}
+
+.carousel{
+    border: 6px solid black;
+    width: 70vw;
+    display: flex;
+    align-items: center;
+}

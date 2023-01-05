@@ -8,7 +8,9 @@ export default function Home(): JSX.Element {
   return (
     <main className={st.main}>
       <Navbar/>
+      {/* <h3 className={st.smallFont, st.smalltitle1}>ARTIST</h3> */}
       <h1 className={st.header}>EMILIANO CÁCERES</h1>
+      {/* <h3 className={st.smallFont}>STILE</h3> */}
       <Carousel/>
       
       <p>
