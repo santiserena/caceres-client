@@ -1,10 +1,49 @@
-.bu {
-  background-color: #212122;
-  color: red;
-  border: 1px solid blueviolet;
-  border-radius: 12px ;
+.main {
+  display: flex;
 }
 
-button:hover {
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+.buttonBuilt{
+  /* animation-name: slidein;
+  animation-duration: 3s; */
+  border-top: 1px solid green;
+  margin-left: 3%;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
+
+@media only screen and (max-width: 1000px){
+  .buttonBuilt{
+    /* animation-name: slidein;
+    animation-duration: 3s; */
+    border-top: 1px solid greenyellow;
+    margin-left: 3%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .buttonBuilt{
+    /* animation-name: slidein;
+    animation-duration: 3s; */
+    border-top: 1px solid red;
+    margin-left: 0%;
+  }
+
+  .main{
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+
+/* MOVIMIENTO */
+/* @keyframes slidein {
+  from {
+    margin-left:100%;
+    width:300%
+  }
+
+  to {
+   margin-left:0%;
+   width:100%;
+ }
+} */

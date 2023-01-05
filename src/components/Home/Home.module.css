@@ -1,3 +1,29 @@
-/* .tex{
-    background-color: blue;
-} */
+.main{
+   height: 100vh; 
+   background:  radial-gradient(circle at 25% 5%, #6b6363, #0c0c0d );
+}
+
+.header{
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-bottom: 6%;
+    color: #FFFFFF;
+    font-size: 4.1vw;
+    font-family:fantasy;
+    font-weight:700;
+    text-align: center;
+}
+
+@media only screen and (max-width: 1000px){
+    .header{
+        font-size: 7vw;
+    } 
+  }
+  
+@media screen and (max-width: 400px) {
+  
+    .header{
+        font-size: 4.5vh;
+    }
+  }
+  

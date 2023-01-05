@@ -4,20 +4,25 @@ import ButtonBuilt from "../ButtonBuilt/Button";
 
 export default function Navbar(): JSX.Element {
   return (
-    <div>
-      <br/>
-      <Link to="/">
-        <ButtonBuilt t="Home"/>
-      </Link>
+    <main className={st.main}>
+      
+      <div className={st.buttonBuilt}>
+        <Link to="/">
+          <ButtonBuilt t="Home" />
+        </Link>
+      </div>
 
-      <Link to="/gallery">
-        <ButtonBuilt t="Gallery"/>
-      </Link>
+      <div className={st.buttonBuilt}>
+        <Link to="/gallery">
+          <ButtonBuilt t="Gallery" />
+        </Link>
+      </div>
 
-      <a href="https://www.instagram.com/capuzz.art/" target="_blank">
-        <ButtonBuilt t="Instagram"/>
-      </a>
-
-    </div>
+      <div className={st.buttonBuilt}>
+        <a href="https://www.instagram.com/capuzz.art/" target="_blank">
+          <ButtonBuilt t="Instagram" />
+        </a>
+      </div>
+    </main>
   );
 }

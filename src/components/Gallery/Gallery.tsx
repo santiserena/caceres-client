@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination/Pagination";
+import Navbar from "../Navbar/Navbar";
 
 export default function Gallery(): JSX.Element {
   
@@ -73,7 +74,8 @@ export default function Gallery(): JSX.Element {
 
   return (
     <div>
-      <br />
+      
+      <Navbar/>
 
       <label>Categories: </label>
       <select value={selectDefault} onChange={selectHandle}>
